@@ -19,7 +19,7 @@ More specifically, we suggest the following 3 step prompt construction approach 
 
 1. **Step**: **Flip label on forget point.** Given a deletion request, we flip the label on the corresponding training point whose influence should be removed from the model resulting in the template: $[\text{Forget Input}]_0$ $[\text{Flipped Label}]_0$.
 
-2. **Step**: **Add $s$ correctly labelled training points.**
+2. **Step**: **Add $s$ correctly labeled training points.**
 Next, excluding the forget point, we randomly sample $s$ labeled example pairs which we add to the template of step 1, resulting in the updated template: $[\text{Forget Input}]_0$ $[\text{Flipped Label}]_0$ \n  $[\text{Input 1}]_1$ $[\text{Label 1}]_1$ \n $\cdots$ $[\text{Input s}]_s$ $[\text{Label s}]_s$.
 
 3. **Step**: **Prediction.** Finally, we add the query input to the template resulting in the final prompt $[\text{Forget Input}]_0$ $[\text{Flipped Label}]_0$ \n  $[\text{Input 1}]_1$ $[\text{Label 1}]_1$ \n $\cdots$ $[\text{Input s}]_s$ $[\text{Label s}]_s$  $[\text{Query Input}]$  and let the model predict the next token using temperature $t=0$.
