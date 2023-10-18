@@ -15,7 +15,7 @@ arXiv preprint: arXiv:2310.07579;  2023.
 The main goal of our framework is to eliminate the need to re-finetune the model from scratch or to update the parameters of the model when unlearning a specific training data point. 
 Therefore, at inference time, we construct a specific context that ideally lets the language model classify text as if it had never seen the specific data point during training before.
 To this end, our framework leverages incorrectly and correctly labelled examples to construct the following prompt which is provided as input to the LLM at inference time.
-More specifically, we suggest the following 3 step prompt construction approach which we term \texttt{ICUL}:
+More specifically, we suggest the following 3 step prompt construction approach which we term ICUL:
 
 1. **Step**: **Flip label on forget point.** Given a deletion request, we flip the label on the corresponding training point whose influence should be removed from the model resulting in the template: $[\text{Forget Input}]_0$ $[\text{Flipped Label}]_0$.
 
@@ -54,15 +54,15 @@ For example, the snippet below runs the evaluation for the random ICUL setup sho
 ```
 --array=0-9 eval_sbatches_ubs1/1b1/ablations/eval_sst2_n_ctxt2_ablation-exchange_bloom1b1.sh
 ```
-When you want to run the evaluation using gradient ascent (GA) as an unlearning method, make sure to to set ``"unlearning_methods": ["ga"]`` in the config file: ``config_eval_rep.json``. For example, after you have modified the config_eval_rep.json, run:
+When you want to run the evaluation using gradient ascent (GA) as an unlearning method, make sure to to set ``"unlearning_methods": ["ga"]`` in the config file: ``config_eval_rep.json``. For example, after you have modified ``config_eval_rep.json``, run:
 ```
 --array=0-9 eval_sbatches_ubs1/1b1/GA/eval_sst2_n_ctxt2_vary_bloom1b1.sh
 ```
 
 **4. Analyze results using notebooks**
-- analyze_info_in_unlearned_model.ipynb
-- analyze_ablation.ipynb
-- analyze_kmodels_performance.ipynb
+- ``analyze_info_in_unlearned_model.ipynb``: Conducts unlearning efficacy analysis from section 5.2 in the paper.
+- ``analyze_kmodels_performance.ipynb``: Computes accuracy for different data subsets from Section 5.3 in the paper.
+- ``analyze_ablation.ipynb``: Conducts sensitivity analysis from section 5.4 in the paper.
 
 
 ### Credits
