@@ -1,0 +1,14 @@
+{
+    "model_epochs": 1,
+    "unlearning_methods": ["icl"],
+    "n_samples": 12500,
+    "unlearn_batch_size": 1,
+    "n_unlearn_epochs": 1,
+    "verbose": false,
+    "n_epochs": 1,
+    "max_length": 1024,
+    "num_workers": 64,
+    "fp16": true,
+    "path_prefix_model": "path_to_model",
+    "path_prefix_data": "path_to_data"
+}

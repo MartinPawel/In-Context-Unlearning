@@ -1,0 +1,10 @@
+torch
+scipy
+lightning==2.0.0
+transformers==4.27.2
+matplotlib
+pandas
+numpy
+torchmetrics
+watermark
+datasets

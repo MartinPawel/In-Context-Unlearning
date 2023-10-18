@@ -1,0 +1,52 @@
+figure.figsize : 5, 4
+
+# Grid lines
+axes.grid : True
+axes.axisbelow : True
+axes.titlesize: 16
+axes.labelsize: 16
+grid.linestyle : --
+grid.color : k
+grid.alpha : 0.5
+grid.linewidth : 0.5
+
+# Set x axis
+xtick.direction : in
+xtick.major.size : 3
+xtick.major.width : 0.5
+xtick.minor.size : 1.5
+xtick.minor.width : 0.5
+xtick.minor.visible : True
+xtick.top : True
+xtick.labelsize : 16 
+
+# Set y axis
+ytick.direction : in
+ytick.major.size : 3
+ytick.major.width : 0.5
+ytick.minor.size : 1.5
+ytick.minor.width : 0.5
+ytick.minor.visible : True
+ytick.right : True
+ytick.labelsize : 16
+
+
+# Set line widths
+axes.linewidth : 0.5
+lines.linewidth : 1.
+
+# Remove legend frame
+legend.frameon : False
+
+# Always save as 'tight'
+savefig.bbox : tight
+savefig.pad_inches : 0.05
+
+# Use serif fonts
+# font.serif : Times
+font.family : serif
+mathtext.fontset : dejavuserif
+
+# Use LaTeX for math formatting
+# text.usetex : True
+# text.latex.preamble : \usepackage{amsmath} \usepackage{amssymb}

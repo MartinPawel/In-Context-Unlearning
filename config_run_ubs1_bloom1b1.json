@@ -1,0 +1,17 @@
+{
+    "n_epochs": 1,
+    "batch_size": 2,
+    "gradient_accumulation_steps": 4,
+    "ngpu": 1,
+    "learning_rate": 5e-5,
+    "model_name_or_path": "bigscience/bloom-1b1",
+    "max_length": 1024,
+    "num_workers": 64,
+    "fp16": true,
+    "u_bs": 1,
+    "K_models": 10,
+    "in_prob": 0.5,
+    "rng_offset": 0,
+    "path_prefix_model": "path_to_model",
+    "path_prefix_data": "path_to_data"
+}
