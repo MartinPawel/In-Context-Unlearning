@@ -1,6 +1,18 @@
 # In-Context Unlearning
 
-### Reproduce results
+Although unlearning is particularly relevant for LLMs in light of the copyright issues they raise, achieving precise unlearning is computationally infeasible for very large models. To this end, recent work has proposed several algorithms which approximate the removal of training data without retraining the model. These algorithms crucially rely on access to the model parameters in order to update them, an assumption that may not hold in practice due to computational constraints or when the LLM is accessed via API. In this work, we propose a new class of unlearning methods for LLMs we call ''In-Context Unlearning'', providing inputs in context and without having to update model parameters. To unlearn a particular training instance, we provide the instance alongside a flipped label and additional correctly labelled instances which are prepended as inputs to the LLM at inference time. Our experimental results demonstrate that these contexts effectively remove specific information from the training set while maintaining performance levels that are competitive with (or in some cases exceed) state-of-the-art unlearning methods that require access to the LLM parameters.
+
+### ArXiv Preprint
+For a more detailed introduction to aspects presented here please have a look at our paper available on arXiv:
+
+>["In-Context Unlearning: Language Models as Few Shot Unlearners"](https://arxiv.org/abs/2310.07579); Martin Pawelczyk, Seth Neel* and Himabindu Lakkaraju*;
+arXiv preprint: arXiv:2310.07579;  2023.
+
+### Method Overview
+
+<img align="center" width="600" height="200" main="/icul.PNG">
+
+### Getting started
 
 **1. Create conda environment and install requirements**
 
@@ -36,3 +48,14 @@ When you want to run evaluation using GA as an unlearning method, make sure to t
 - analyze_info_in_unlearned_model.ipynb
 - analyze_ablation.ipynb
 - analyze_kmodels_performance.ipynb
+
+
+### Credits
+```
+@article{pawelczyk2023context,
+  title={In-Context Unlearning: Language Models as Few Shot Unlearners},
+  author={Pawelczyk, Martin and Neel, Seth and Lakkaraju, Himabindu},
+  journal={arXiv:2310.07579},
+  year={2023}
+}
+```
