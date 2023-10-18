@@ -31,3 +31,4 @@ For example, the snippet below runs the evaluation for the random ICUL setup sho
 **4. Analyze results using notebooks**
 - analyze_info_in_unlearned_model.ipynb
 - analyze_ablation.ipynb
+- analyze_kmodels_performance.ipynb
