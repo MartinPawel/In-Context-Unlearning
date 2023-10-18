@@ -2,6 +2,8 @@
 
 Although unlearning is particularly relevant for LLMs in light of the copyright issues they raise, achieving precise unlearning is computationally infeasible for very large models. To this end, recent work has proposed several algorithms which approximate the removal of training data without retraining the model. These algorithms crucially rely on access to the model parameters in order to update them, an assumption that may not hold in practice due to computational constraints or when the LLM is accessed via API. In this work, we propose a new class of unlearning methods for LLMs we call ''In-Context Unlearning'', providing inputs in context and without having to update model parameters. To unlearn a particular training instance, we provide the instance alongside a flipped label and additional correctly labelled instances which are prepended as inputs to the LLM at inference time. Our experimental results demonstrate that these contexts effectively remove specific information from the training set while maintaining performance levels that are competitive with (or in some cases exceed) state-of-the-art unlearning methods that require access to the LLM parameters.
 
+![Setup](teaser_full.PNG)
+
 ### ArXiv Preprint
 For a more detailed introduction to aspects presented here please have a look at our paper available on arXiv:
 
@@ -10,7 +12,20 @@ arXiv preprint: arXiv:2310.07579;  2023.
 
 ### Method Overview
 
-<img align="center" width="600" height="200" main="/icul.PNG">
+The main goal of our framework is to eliminate the need to re-finetune the model from scratch or to update the parameters of the model when unlearning a specific training data point. 
+Therefore, at inference time, we construct a specific context that ideally lets the language model classify text as if it had never seen the specific data point during training before.
+To this end, our framework leverages incorrectly and correctly labelled examples to construct the following prompt which is provided as input to the LLM at inference time.
+More specifically, we suggest the following 3 step prompt construction approach which we term \texttt{ICUL}:
+
+1. **Step**: **Flip label on forget point.** Given a deletion request, we flip the label on the corresponding training point whose influence should be removed from the model resulting in the template: $[\text{Forget Input}]_0$ $[\text{Flipped Label}]_0$.
+
+2. **Step**: **Add $s$ correctly labelled training points.**
+Next, excluding the forget point, we randomly sample $s$ labeled example pairs which we add to the template of step 1, resulting in the updated template: $[\text{Forget Input}]_0$ $[\text{Flipped Label}]_0$ \n  $[\text{Input 1}]_1$ $[\text{Label 1}]_1$ \n $\cdots$ $[\text{Input s}]_s$ $[\text{Label s}]_s$.
+
+3. **Step**: **Prediction.** Finally, we add the query input to the template resulting in the final prompt $[\text{Forget Input}]_0$ $[\text{Flipped Label}]_0$ \n  $[\text{Input 1}]_1$ $[\text{Label 1}]_1$ \n $\cdots$ $[\text{Input s}]_s$ $[\text{Label s}]_s$  $[\text{Query Input}]$  and let the model predict the next token using temperature $t=0$.
+
+
+![In-Context Unlearning example](icul.PNG)
 
 ### Getting started
 
@@ -39,7 +54,7 @@ For example, the snippet below runs the evaluation for the random ICUL setup sho
 ```
 --array=0-9 eval_sbatches_ubs1/1b1/ablations/eval_sst2_n_ctxt2_ablation-exchange_bloom1b1.sh
 ```
-When you want to run evaluation using GA as an unlearning method, make sure to to set ``"unlearning_methods": ["ga"]`` in the config file: ``config_eval_rep.json``. For example, after you have modified the config_eval_rep.json, run:
+When you want to run the evaluation using gradient ascent (GA) as an unlearning method, make sure to to set ``"unlearning_methods": ["ga"]`` in the config file: ``config_eval_rep.json``. For example, after you have modified the config_eval_rep.json, run:
 ```
 --array=0-9 eval_sbatches_ubs1/1b1/GA/eval_sst2_n_ctxt2_vary_bloom1b1.sh
 ```
