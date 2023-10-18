@@ -16,7 +16,7 @@ You need to take the following steps in that order.
 
 **2. Run models**
 
-To train the models on the SST-2 dataset using the 1.1B bloom model do the following:
+To train the models on the SST-2 dataset using the 1.1B Bloom model do the following:
 ```
 sbatch run_sbatchs_ubs1/1b1/run_sst2_ubs1_bloom1b1.sbatch
 ```
@@ -27,7 +27,7 @@ For example, the snippet below runs the evaluation for the random ICUL setup sho
 ```
 --array=0-9 eval_sbatches_ubs1/1b1/ablations/eval_sst2_n_ctxt2_ablation-exchange_bloom1b1.sh
 ```
-When you want to run evaluation using GA as an unlearning method, make sure to to set "unlearning_methods": ["ga"] in the config file: config_eval_rep.json. For example, after you have modified the config_eval_rep.json, run:
+When you want to run evaluation using GA as an unlearning method, make sure to to set ``"unlearning_methods": ["ga"]`` in the config file: ``config_eval_rep.json``. For example, after you have modified the config_eval_rep.json, run:
 ```
 --array=0-9 eval_sbatches_ubs1/1b1/GA/eval_sst2_n_ctxt2_vary_bloom1b1.sh
 ```
